@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ recipe.title }}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa; /* Light gray */
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff; /* White */
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #20b2aa; /* Light Sea Green */
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        p {
+            color: #666; /* Gray */
+            margin-bottom: 20px;
+        }
+        .recipe-image {
+            display: block;
+            margin: 0 auto 20px;
+            width: 80%;
+            max-width: 400px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .ingredients {
+            margin-bottom: 20px;
+        }
+        .instructions {
+            margin-bottom: 20px;
+        }
+        .back-link {
+            display: block;
+            text-align: center;
+            color: #4b0082; /* Indigo */
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .back-link:hover {
+            color: #6a5acd; /* Slate Blue */
+        }
+        .ingredient-list li {
+            margin-bottom: 5px;
+        }
+        .instruction-list li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>{{ recipe.title }}</h1>
+        <img class="recipe-image" src="{{ recipe.image }}" alt="{{ recipe.title }}">
+        
+        <div class="ingredients">
+            <h2 style="color: #20b2aa;">Ingredients:</h2>
+            <ul class="ingredient-list">
+                {% for ingredient in recipe.extendedIngredients %}
+                    <li>{{ ingredient.original }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        
+        <div class="instructions">
+            <h2 style="color: #20b2aa;">Instructions:</h2>
+            <ol class="instruction-list">
+                {% for instruction in recipe.analyzedInstructions %}
+                    {% for step in instruction.steps %}
+                        <li>{{ step.step }}</li>
+                    {% endfor %}
+                {% endfor %}
+            </ol>
+        </div>
+        
+        <a class="back-link" href="/home">Back to Home</a>
+    </div>
+</body>
+</html>

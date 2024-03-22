@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Search</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa; /* Light gray */
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff; /* White */
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #ff7f50; /* Coral */
+            margin-bottom: 20px;
+        }
+        form {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        input[type="text"] {
+            width: 70%;
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            margin-right: 10px;
+            box-sizing: border-box;
+        }
+        button[type="submit"] {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #20b2aa; /* Light Sea Green */
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button[type="submit"]:hover {
+            background-color: #008b8b; /* Dark Cyan */
+        }
+        .recipe-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #fafad2; /* Light Goldenrod Yellow */
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .recipe-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin-right: 20px;
+        }
+        .recipe-title {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .recipe-link {
+            color: #4b0082; /* Indigo */
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .recipe-link:hover {
+            color: #6a5acd; /* Slate Blue */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Explore Delicious Recipes</h1>
+        <form action="/" method="post">
+            <input type="text" name="search_query" placeholder="Search recipes..." value="{{ search_query }}">
+            <button type="submit"><i class="fas fa-search"></i> Search</button>
+        </form>
+        {% if recipes %}
+            <div class="recipes">
+                {% for recipe in recipes %}
+                    <div class="recipe-item">
+                        <img class="recipe-image" src="{{ recipe.image }}" alt="{{ recipe.title }}">
+                        <div>
+                            <div class="recipe-title">{{ recipe.title }}</div>
+                            <a class="recipe-link" href="/recipe/{{ recipe.id }}?search_query={{ search_query }}">View Recipe <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>No recipes found.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
