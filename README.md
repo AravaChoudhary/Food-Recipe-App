@@ -2,4 +2,4 @@
 Based on Flask , it recommends the recipe of different dishes 
 
 # Live Link
-tastytreasures.vercel.app
+https://tastytreasures.vercel.app
